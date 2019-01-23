@@ -26,7 +26,8 @@ class App extends Component {
     };
   }
 
-  handleToggleContent = content => {
+  handleToggleContent = (event, content) => {
+    event.stopPropagation();
     if (this.state.content !== content) {
       this.setState({ content });
     } else {
@@ -77,7 +78,7 @@ class App extends Component {
     return (
       <div>
         <Row>
-          <Col xs="3" sm="2" md="1">
+          <Col xs="2" sm="2" md="1">
             <Nav vertical fill className="side-nav">
               {types.map(t => {
                 let icon = t[0] === this.state.content ? "clicked" : "icon";
@@ -87,7 +88,7 @@ class App extends Component {
                   <NavItem key={t[0]}>
                     <div
                       className={divType}
-                      onClick={() => this.handleToggleContent(t[0])}
+                      onClick={e => this.handleToggleContent(e, t[0])}
                       tabIndex="0"
                     >
                       <FontAwesomeIcon
@@ -101,7 +102,7 @@ class App extends Component {
               })}
             </Nav>
           </Col>
-          <Col>
+          <Col xs="10">
             <Container>
               <Col
                 sm="11"
